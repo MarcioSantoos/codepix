@@ -2,6 +2,7 @@ package model
 
 import (
 	"errors"
+
 	"github.com/asaskevich/govalidator"
 	uuid "github.com/satori/go.uuid"
 	"time"
@@ -23,7 +24,7 @@ type PixKey struct {
 	Base      `valid:"required"`
 	Kind      string   `json:"kind" valid:"notnull"`
 	Key       string   `json:"key" valid:"notnull"`
-	AccountID string   `valid:"-"`
+	AccountID string   `gorm:"column:bank_id;type:uuid;not null" valid:"-"`
 	Account   *Account `valid:"-"`
 	Status    string   `json:"status" valid:"notnull"`
 }
