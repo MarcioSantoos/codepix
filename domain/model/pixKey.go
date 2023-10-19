@@ -2,7 +2,6 @@ package model
 
 import (
 	"errors"
-
 	"github.com/asaskevich/govalidator"
 	uuid "github.com/satori/go.uuid"
 	"time"
@@ -22,11 +21,11 @@ func init() {
 
 type PixKey struct {
 	Base      `valid:"required"`
-	Kind      string   `json:"kind" valid:"notnull"`
-	Key       string   `json:"key" valid:"notnull"`
-	AccountID string   `gorm:"column:bank_id;type:uuid;not null" valid:"-"`
+	Kind      string   `json:"kind" gorm:"type:varchar(20)" valid:"notnull"`
+	Key       string   `json:"key" gorm:"type:varchar(255)" valid:"notnull"`
+	AccountID string   `gorm:"column:account_id;type:uuid;not null" valid:"-"`
 	Account   *Account `valid:"-"`
-	Status    string   `json:"status" valid:"notnull"`
+	Status    string   `json:"status" gorm:"type:varchar(20)" valid:"notnull"`
 }
 
 func (p *PixKey) isValid() error {
